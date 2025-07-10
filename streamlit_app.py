@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import math
 from pathlib import Path
-
+#Shivam Sharma
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
     page_title='GDP dashboard',
@@ -46,7 +46,7 @@ def get_gdp_data():
     #
     # So let's pivot all those year-columns into two: Year and GDP
     gdp_df = raw_gdp_df.melt(
-        ['Country Code'],
+        ['Country Name'],
         [str(x) for x in range(MIN_YEAR, MAX_YEAR + 1)],
         'Year',
         'GDP',
@@ -100,7 +100,7 @@ selected_countries = st.multiselect(
 
 # Filter the data
 filtered_gdp_df = gdp_df[
-    (gdp_df['Country Code'].isin(selected_countries))
+    (gdp_df['Country Name'].isin(selected_countries))
     & (gdp_df['Year'] <= to_year)
     & (from_year <= gdp_df['Year'])
 ]
@@ -113,7 +113,7 @@ st.line_chart(
     filtered_gdp_df,
     x='Year',
     y='GDP',
-    color='Country Code',
+    color='Country Name',
 )
 
 ''
